@@ -4,31 +4,31 @@ const SKILLS = [
 	{
 		name: "HTML",
 		level: 95,
-		details: "Semantic markup, accessible structure, SEO-friendly pages.",
+		details: "Building semantic, accessible structures with clean layout foundations and SEO-friendly practices",
 		color: "#f97316",
 	},
 	{
 		name: "CSS",
 		level: 90,
-		details: "Responsive layouts (Flex/Grid), animations, design systems.",
+		details: "Creating responsive, modern UI using Flexbox/Grid, with smooth animations and attention to visual detail.",
 		color: "#38bdf8",
 	},
 	{
 		name: "JavaScript",
 		level: 85,
-		details: "ESNext, async patterns, DOM, performance, clean architecture.",
+		details: "Writing clean, efficient logic with async handling, DOM manipulation, and performance-focused solutions.",
 		color: "#facc15",
 	},
 	{
 		name: "React",
 		level: 82,
-		details: "Hooks, component patterns, state management, reusable UI.",
+		details: "Building reusable components, managing state effectively, and crafting interactive user experiences.",
 		color: "#22d3ee",
 	},
 	{
 		name: "Next.js",
 		level: 75,
-		details: "Routing, data fetching, SSR/SSG basics, app structure.",
+		details: "Developing fast, structured apps with routing, data fetching, and optimizing performance for real-world projects.",
 		color: "#a78bfa",
 	},
 ];
