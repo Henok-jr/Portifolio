@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
+import profileImg from "../assets/Profile.jpg";
 
 const cx = (...parts) => parts.filter(Boolean).join(" ");
 
-export default function Navbar() {
+function Navbar() {
   const links = useMemo(
     () => [
       { href: "#home", label: "Home" },
@@ -64,7 +65,17 @@ export default function Navbar() {
           onClick={(e) => onNavClick(e, "#home")}
           aria-label="Go to Home"
         >
-          <span className="nav__avatar" aria-hidden="true" />
+          <span className="nav__avatarWrap">
+            <img
+              className="nav__avatar"
+              src="../src/assets/Profile.jpg"
+              alt="Henok Befekadu"
+              width={38}
+              height={38}
+              loading="eager"
+              decoding="async"
+            />
+          </span>
           <span className="nav__name">Henok Befekadu</span>
         </a>
 
@@ -99,3 +110,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+export default Navbar;
