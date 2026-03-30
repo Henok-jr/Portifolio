@@ -61,9 +61,9 @@ function Navbar({ theme = "light", onToggleTheme }) {
       <div className="container nav__inner">
         <a
           className="nav__brand"
-          href="#home"
-          onClick={(e) => onNavClick(e, "#home")}
-          aria-label="Go to Home"
+          href="#about"
+          onClick={(e) => onNavClick(e, "#about")}
+          aria-label="Go to About"
         >
           <span className="nav__avatarWrap">
             <img
@@ -90,7 +90,6 @@ function Navbar({ theme = "light", onToggleTheme }) {
             <span className="nav__themeIcon" aria-hidden="true">
               {theme === "dark" ? "☀" : "🌙"}
             </span>
-            <span className="nav__themeText">{theme === "dark" ? "Light" : "Dark"}</span>
           </button>
 
           <button

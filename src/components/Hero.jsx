@@ -1,17 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
-import profileImg from "../assets/Profile.jpg";
 
 export default function Hero() {
-  const phrases = useMemo(
-    () => [
-      "Frontend Developer",
-      "React & Next.js Enthusiast",
-      "UI/UX Lover",
-      "Web Performance Fanatic",
-      "Accessibility Advocate",
-    ],
-    []
-  );
+  const phrases = useMemo(() => ["Fullstack Developer"], []);
 
   const prefersReducedMotion =
     typeof window !== "undefined" &&
@@ -60,13 +50,13 @@ export default function Hero() {
   const ariaTitle = phrases[phraseIndex] ?? "";
 
   return (
-    <section id="home" className="section hero">
-      <div className="container hero__grid">
-        <div className="hero__copy">
+    <section id="home" className="section hero hero--fullscreen">
+      <div className="container hero__grid hero__grid--single hero__grid--center">
+        <div className="hero__copy hero__copy--center">
           <p className="eyebrow">
-            Hi, I’m <span className="eyebrow__name">Henok</span>
-            <span className="eyebrow__badge">Frontend</span>
+            Hi, I’m <span className="eyebrow__name"> Henok</span>
           </p>
+
           <h1 className="hero__title hero__title--typing" aria-label={ariaTitle}>
             <span aria-hidden="true">{prefersReducedMotion ? ariaTitle : typed}</span>
             {!prefersReducedMotion && (
@@ -75,24 +65,11 @@ export default function Hero() {
               </span>
             )}
           </h1>
-          <p className="hero__subtitle">
-            I design and build web experiences that blend performance with creativity. My goal is simple — to create digital products that feel smooth, look sharp, and truly stand out. As a frontend developer, I craft immersive, responsive interfaces that draw users in and keep them engaged. With a strong focus on detail, performance, and usability, I transform concepts into polished digital experiences that leave a lasting impression.
-          </p>
 
-          <div className="hero__cta">
-            <a className="btn" href="#projects">
-              View Projects
+          <div className="hero__cta" aria-label="Hero actions">
+            <a className="btn" href="/Henok-Befekadu-Resume.pdf" download>
+              View Resume
             </a>
-            <a className="btn btn--ghost" href="#contact">
-              Contact
-            </a>
-          </div>
-        </div>
-
-        <div className="hero__photo" aria-label="Profile photo">
-          <div className="hero__photoInner">
-            <div className="hero__photoCircle" aria-hidden="true" />
-            <img className="hero__photoImg" src={profileImg} alt="Henok Befekadu" />
           </div>
         </div>
       </div>
