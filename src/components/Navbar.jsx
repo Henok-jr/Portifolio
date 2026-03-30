@@ -3,7 +3,7 @@ import profileImg from "../assets/Profile.jpg";
 
 const cx = (...parts) => parts.filter(Boolean).join(" ");
 
-function Navbar() {
+function Navbar({ theme = "light", onToggleTheme }) {
   const links = useMemo(
     () => [
       { href: "#home", label: "Home" },
@@ -68,7 +68,7 @@ function Navbar() {
           <span className="nav__avatarWrap">
             <img
               className="nav__avatar"
-              src="../src/assets/Profile.jpg"
+              src={profileImg}
               alt="Henok Befekadu"
               width={38}
               height={38}
@@ -79,17 +79,32 @@ function Navbar() {
           <span className="nav__name">Henok Befekadu</span>
         </a>
 
-        <button
-          className="nav__toggle"
-          type="button"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          <span className="nav__toggleBar" />
-          <span className="nav__toggleBar" />
-          <span className="nav__toggleBar" />
-        </button>
+        <div className="nav__actions">
+          <button
+            className="nav__themeBtn"
+            type="button"
+            onClick={onToggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Light mode" : "Dark mode"}
+          >
+            <span className="nav__themeIcon" aria-hidden="true">
+              {theme === "dark" ? "☀" : "🌙"}
+            </span>
+            <span className="nav__themeText">{theme === "dark" ? "Light" : "Dark"}</span>
+          </button>
+
+          <button
+            className="nav__toggle"
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <span className="nav__toggleBar" />
+            <span className="nav__toggleBar" />
+            <span className="nav__toggleBar" />
+          </button>
+        </div>
 
         <nav className={cx("nav__links", menuOpen && "is-open")} aria-label="Primary">
           {links.map((l) => {

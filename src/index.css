@@ -1,27 +1,25 @@
 :root {
-  --bg: #0b0f19;
-  --panel: rgba(255, 255, 255, 0.06);
-  --panel-2: rgba(255, 255, 255, 0.08);
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.68);
-  --border: rgba(255, 255, 255, 0.12);
-  --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
-
   --accent: #7c3aed;
   --accent-2: #22d3ee;
+
+  /* Theme tokens (default values; overridden by [data-theme]) */
+  --bg: #ffffff;
+  --panel: rgba(15, 23, 42, 0.04);
+  --panel-2: rgba(15, 23, 42, 0.06);
+  --text: rgba(15, 23, 42, 0.92);
+  --muted: rgba(15, 23, 42, 0.62);
+  --border: rgba(15, 23, 42, 0.12);
+  --shadow: 0 18px 60px rgba(2, 6, 23, 0.10);
 
   --container: 1120px;
   --radius: 16px;
   --radius-sm: 12px;
 
-  color-scheme: dark;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  line-height: 1.6;
-  font-weight: 400;
+  color-scheme: light;
 
-  background: radial-gradient(1200px 900px at 10% 10%, rgba(124, 58, 237, 0.18), transparent 55%),
-    radial-gradient(1000px 700px at 90% 20%, rgba(34, 211, 238, 0.12), transparent 55%),
+  background:
+    radial-gradient(1200px 900px at 10% 10%, rgba(124, 58, 237, 0.10), transparent 55%),
+    radial-gradient(1000px 700px at 90% 20%, rgba(34, 211, 238, 0.08), transparent 55%),
     var(--bg);
   color: var(--text);
 
@@ -30,6 +28,121 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Theme switching via App data attribute */
+.app[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --panel: rgba(15, 23, 42, 0.04);
+  --panel-2: rgba(15, 23, 42, 0.06);
+  --text: rgba(15, 23, 42, 0.92);
+  --muted: rgba(15, 23, 42, 0.62);
+  --border: rgba(15, 23, 42, 0.12);
+  --shadow: 0 18px 60px rgba(2, 6, 23, 0.10);
+}
+
+.app[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0b0f19;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel-2: rgba(255, 255, 255, 0.08);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.68);
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* Make page background depend on theme tokens */
+:root {
+  /* ...existing code... */
+  background:
+    radial-gradient(1200px 900px at 10% 10%, rgba(124, 58, 237, 0.10), transparent 55%),
+    radial-gradient(1000px 700px at 90% 20%, rgba(34, 211, 238, 0.08), transparent 55%),
+    var(--bg);
+  color: var(--text);
+  /* ...existing code... */
+}
+
+/* Sections */
+.section--alt {
+  background: color-mix(in srgb, var(--text) 3%, transparent);
+  border-block: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+/* Navbar (theme-aware) */
+.nav {
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+}
+
+.nav__link {
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+
+.nav__link:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text);
+}
+
+.nav__link.is-active {
+  color: var(--text);
+  border-color: rgba(124, 58, 237, 0.35);
+  background: rgba(124, 58, 237, 0.10);
+}
+
+/* Navbar actions + theme toggle */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav__themeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.nav__themeBtn:hover {
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+}
+
+.nav__themeIcon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.nav__themeText {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 640px) {
+  .nav__themeText {
+    display: none;
+  }
+}
+
+.nav__toggle {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.nav__toggleBar {
+  background: color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+/* General styles */
 * {
   box-sizing: border-box;
 }
@@ -56,8 +169,63 @@ a {
 }
 
 .section--alt {
-  background: rgba(255, 255, 255, 0.03);
-  border-block: 1px solid var(--border);
+  /* keep alt sections subtle instead of flipping to white */
+  background: rgba(15, 23, 42, 0.02);
+  border-block: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.section--alt .section__title {
+  color: var(--text);
+}
+
+.section--alt .section__sub,
+.section--alt .muted {
+  color: var(--muted);
+}
+
+.section--alt .projectCard {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(15, 23, 42, 0.10);
+  box-shadow: 0 18px 50px rgba(2, 6, 23, 0.10);
+}
+
+.section--alt .projectCard:hover {
+  border-color: rgba(124, 58, 237, 0.28);
+  box-shadow: 0 26px 70px rgba(124, 58, 237, 0.12);
+}
+
+.section--alt .projectCard__desc {
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.section--alt .tag {
+  background: rgba(124, 58, 237, 0.10);
+  border-color: rgba(124, 58, 237, 0.20);
+  color: rgba(15, 23, 42, 0.88);
+}
+
+.section--alt .btn {
+  border-color: rgba(124, 58, 237, 0.55);
+  background: rgba(124, 58, 237, 0.10);
+  color: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.12);
+}
+
+.section--alt .btn:hover {
+  background: rgba(124, 58, 237, 0.16);
+}
+
+.section--alt .projectCard__placeholder {
+  background:
+    radial-gradient(600px 380px at 20% 20%, rgba(124, 58, 237, 0.14), transparent 55%),
+    radial-gradient(600px 380px at 80% 80%, rgba(34, 211, 238, 0.10), transparent 60%),
+    rgba(15, 23, 42, 0.04);
+}
+
+.section--alt .projectCard__placeholderText {
+  background: rgba(255, 255, 255, 0.75);
+  color: rgba(15, 23, 42, 0.75);
+  border-color: rgba(15, 23, 42, 0.12);
 }
 
 .section__head {
@@ -91,12 +259,8 @@ a {
 
 /* Navbar */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(14px);
-  background: rgba(11, 15, 25, 0.7);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(255, 255, 255, 0.72);
 }
 
 .nav__inner {
@@ -159,22 +323,22 @@ a {
 }
 
 .nav__link {
+  color: rgba(15, 23, 42, 0.72);
   text-decoration: none;
   padding: 10px 12px;
   border-radius: 12px;
-  color: rgba(255, 255, 255, 0.78);
   border: 1px solid transparent;
 }
 
 .nav__link:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(15, 23, 42, 0.04);
   color: var(--text);
 }
 
 .nav__link.is-active {
   color: var(--text);
-  border-color: rgba(124, 58, 237, 0.45);
-  background: rgba(124, 58, 237, 0.12);
+  border-color: rgba(124, 58, 237, 0.35);
+  background: rgba(124, 58, 237, 0.08);
 }
 
 .nav__toggle {
@@ -190,7 +354,7 @@ a {
   display: block;
   width: 18px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(15, 23, 42, 0.7);
   margin: 4px 0;
   border-radius: 999px;
 }
